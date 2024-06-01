@@ -87,9 +87,9 @@ export const Playground: React.FC<SidebarProps> = ({
       backgroundColor:
         level === 0
           ? hexToRgba(
-            themes[theme].menu.menuContent,
-            hasImage && !collapsed ? 0.4 : 1
-          )
+              themes[theme].menu.menuContent,
+              hasImage && !collapsed ? 0.4 : 1
+            )
           : "transparent",
     }),
 
@@ -118,8 +118,7 @@ export const Playground: React.FC<SidebarProps> = ({
         display: "flex",
         height: "100%",
         direction: rtl ? "rtl" : "ltr",
-      }}
-    >
+      }}>
       <Sidebar
         collapsed={collapsed}
         toggled={toggled}
@@ -134,11 +133,9 @@ export const Playground: React.FC<SidebarProps> = ({
         )}
         rootStyles={{
           color: themes[theme].sidebar.color,
-        }}
-      >
+        }}>
         <div
-          style={{ display: "flex", flexDirection: "column", height: "100%" }}
-        >
+          style={{ display: "flex", flexDirection: "column", height: "100%" }}>
           <SidebarHeader
             rtl={rtl}
             style={{ marginBottom: "24px", marginTop: "16px" }}
@@ -151,51 +148,43 @@ export const Playground: React.FC<SidebarProps> = ({
                 style={{
                   opacity: collapsed ? 0 : 0.7,
                   letterSpacing: "0.5px",
-                }}
-              ></Typography>
+                }}></Typography>
             </div>
             <Menu menuItemStyles={menuItemStyles}>
               <SubMenu label="Mô-đun" icon={<Diamond />}>
                 <MenuItem
                   active={location.pathname.startsWith("/model")}
-                  component={<Link to={"/model"}></Link>}
-                >
+                  component={<Link to={"/model"}></Link>}>
                   Mô hình cấp quản lý
                 </MenuItem>
 
                 <MenuItem
                   active={location.pathname.startsWith("/detail_employee")}
-                  component={<Link to={"/detail_employee"}></Link>}
-                >
+                  component={<Link to={"/detail_employee"}></Link>}>
                   Danh sách nhân viên
                 </MenuItem>
                 <MenuItem
                   active={location.pathname.startsWith("/import")}
-                  component={<Link to={"/import"}></Link>}
-                >
+                  component={<Link to={"/import"}></Link>}>
                   Nhập dữ liệu
                 </MenuItem>
                 <MenuItem
                   active={location.pathname.startsWith("/general")}
-                  component={<Link to={"/general"}></Link>}
-                >
+                  component={<Link to={"/general"}></Link>}>
                   Thông tin chung
                 </MenuItem>
                 <MenuItem
                   active={location.pathname.startsWith("/statistic")}
-                  component={<Link to={"/statistic"}></Link>}
-                >
+                  component={<Link to={"/statistic"}></Link>}>
                   Thống kê
                 </MenuItem>
                 {!dissable && (
                   <MenuItem
                     active={location.pathname.startsWith("/active_page")}
-                    component={<Link to={"/active_page"}></Link>}
-                  >
+                    component={<Link to={"/active_page"}></Link>}>
                     Duyệt nhân viên
                   </MenuItem>
-                )
-                }
+                )}
               </SubMenu>
             </Menu>
 
@@ -204,24 +193,26 @@ export const Playground: React.FC<SidebarProps> = ({
                 padding: "0 24px",
                 marginBottom: "8px",
                 marginTop: "32px",
-              }}
-            >
+              }}>
               <Typography
                 variant="body2"
                 fontWeight={600}
                 style={{
                   opacity: collapsed ? 0 : 0.7,
                   letterSpacing: "0.5px",
-                }}
-              >
-                Extra
+                }}>
+                {t("sidebar.extra")}
               </Typography>
             </div>
 
             <Menu menuItemStyles={menuItemStyles}>
               <SubMenu label={t("sidebar.theme")} icon={<DarkMode />}>
-                <MenuItem onClick={() => setTheme("dark")}>Dark</MenuItem>
-                <MenuItem onClick={() => setTheme("light")}> Light</MenuItem>
+                <MenuItem onClick={() => setTheme("dark")}>
+                  {t("sidebar.dark")}
+                </MenuItem>
+                <MenuItem onClick={() => setTheme("light")}>
+                  {t("sidebar.light")}
+                </MenuItem>
               </SubMenu>
               <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
             </Menu>

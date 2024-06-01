@@ -1,9 +1,15 @@
 {
-    "common": {
-      "helloWorld": "Xin chào thế giới"
-    },
-    "sidebar": {
-      "theme": "Chủ đề"
-    }
+  "common": {
+    "helloWorld": "Xin chào thế giới",
+    "language": "Ngôn ngữ",
+    "en": "Tiếng Anh",
+    "vi": "Tiếng Việt",
+    "view_code": "Xem mã nguồn"
+  },
+  "sidebar": {
+    "theme": "Chủ đề",
+    "light": "Sáng",
+    "dark": "Tối",
+    "extra": "Thêm..."
   }
-  
+}

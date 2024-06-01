@@ -1,9 +1,15 @@
 {
-    "common": {
-      "helloWorld": "Hello world"
-    },
-    "sidebar": {
-      "theme": "Theme"
-    }
+  "common": {
+    "helloWorld": "Hello world",
+    "language": "Language",
+    "en": "English",
+    "vi": "Vietnamese",
+    "view_code": "View code"
+  },
+  "sidebar": {
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "extra": "Extra"
   }
-  
+}

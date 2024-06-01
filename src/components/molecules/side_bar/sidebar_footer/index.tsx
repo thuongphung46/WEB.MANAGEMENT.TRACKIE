@@ -3,6 +3,7 @@ import React from "react";
 import packageJson from "../../../../../package.json";
 import { GitHub } from "@mui/icons-material";
 import { Typography } from "@mui/material";
+import { t } from "i18next";
 
 interface SidebarFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -60,8 +61,7 @@ export const SidebarFooter: React.FC<SidebarFooterProps> = ({
         display: "flex",
         justifyContent: "center",
         paddingBottom: "20px",
-      }}
-    >
+      }}>
       {collapsed ? (
         <StyledCollapsedSidebarFooter href={codeUrl} target="_blank">
           <GitHub
@@ -82,14 +82,13 @@ export const SidebarFooter: React.FC<SidebarFooterProps> = ({
           <Typography fontWeight={600}>Trackie</Typography>
           <Typography
             variant="caption"
-            style={{ letterSpacing: 1, opacity: 0.7 }}
-          >
+            style={{ letterSpacing: 1, opacity: 0.7 }}>
             V {packageJson.version}
           </Typography>
           <div style={{ marginTop: "16px" }}>
             <StyledButton href={codeUrl} target="_blank">
               <Typography variant="caption" color="#607489" fontWeight={600}>
-                View code
+                {t("common.view_code")}
               </Typography>
             </StyledButton>
           </div>
