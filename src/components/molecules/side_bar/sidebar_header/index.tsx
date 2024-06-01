@@ -56,7 +56,7 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
       <div style={{ display: "flex", alignItems: "center" }}>
         <StyledLogo rtl={rtl}>K</StyledLogo>
         <Typography variant="subtitle1" fontWeight={700} color="#0098e5">
-          HRM
+          Trackie
         </Typography>
       </div>
     </StyledSidebarHeader>

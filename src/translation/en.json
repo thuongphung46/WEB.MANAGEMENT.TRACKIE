@@ -1,6 +1,9 @@
 {
     "common": {
       "helloWorld": "Hello world"
+    },
+    "sidebar": {
+      "theme": "Theme"
     }
   }
   

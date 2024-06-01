@@ -1,6 +1,9 @@
 {
     "common": {
       "helloWorld": "Xin chào thế giới"
+    },
+    "sidebar": {
+      "theme": "Chủ đề"
     }
   }
   

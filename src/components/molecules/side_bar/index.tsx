@@ -16,6 +16,7 @@ import { themes } from "@constants/themes/styles";
 import { Link, useLocation } from "react-router-dom";
 import { KeyValue } from "@constants/GlobalConstant";
 import HRMStorage from "@common/function";
+import { t } from "i18next";
 
 // hex to rgba converter
 const hexToRgba = (hex: string, alpha: number) => {
@@ -218,7 +219,7 @@ export const Playground: React.FC<SidebarProps> = ({
             </div>
 
             <Menu menuItemStyles={menuItemStyles}>
-              <SubMenu label="Theme" icon={<DarkMode />}>
+              <SubMenu label={t("sidebar.theme")} icon={<DarkMode />}>
                 <MenuItem onClick={() => setTheme("dark")}>Dark</MenuItem>
                 <MenuItem onClick={() => setTheme("light")}> Light</MenuItem>
               </SubMenu>

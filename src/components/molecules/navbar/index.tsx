@@ -67,9 +67,7 @@ interface PrimarySearchAppBarProps {
 
 export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
   setCollapsed,
-  collapsed,
   setToggled,
-  toggled,
   broken,
 }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

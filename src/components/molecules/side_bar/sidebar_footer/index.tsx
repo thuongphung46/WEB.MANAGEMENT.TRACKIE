@@ -79,7 +79,7 @@ export const SidebarFooter: React.FC<SidebarFooterProps> = ({
               }}
             />
           </div>
-          <Typography fontWeight={600}>HRM</Typography>
+          <Typography fontWeight={600}>Trackie</Typography>
           <Typography
             variant="caption"
             style={{ letterSpacing: 1, opacity: 0.7 }}
