@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "redux/store";
+import { RootState } from "@redux/store";
 
 // Define a type for the slice state
 export interface IloadingState {

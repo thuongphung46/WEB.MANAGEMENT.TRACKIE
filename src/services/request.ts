@@ -1,9 +1,9 @@
 import axios, { HttpStatusCode } from "axios";
 import { KeyValue } from "@constants/GlobalConstant";
 import { APP_CONFIG } from "@constants/app_config";
-import HRMStorage from "@constants/function";
 import { MESSAGE_CODE } from "../interfaces/enum";
 import { GlobalData } from "@constants/global_data";
+import HRMStorage from "@common/function";
 
 const baseUrl = APP_CONFIG.API_URL;
 const INVALID_TOKEN = [401, 403, 404, 405, 406, 407, 203];
