@@ -13,9 +13,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import Person2Icon from "@mui/icons-material/Person2";
+import LogoutIcon from "@mui/icons-material/Logout";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useAppSelector } from "../../../redux/hook";
+import { ImageList, ImageListItem } from "@mui/material";
+import { usSVG, viSVG } from "@assets/index";
+import { t } from "i18next";
+import HRMStorage from "@/common/function";
 
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -78,6 +84,11 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const handleLogout = React.useCallback(() => {
+    HRMStorage.clear();
+    window.location.href = "/login";
+  }, []);
+
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -100,20 +111,82 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "top",
+        vertical: "bottom",
         horizontal: "right",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "left",
       }}
       open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      onClose={handleMenuClose}>
+      <Box
+        sx={{
+          height: "250px",
+          width: "248px",
+          padding: "4px",
+        }}>
+        <MenuItem onClick={handleMenuClose}>
+          <Badge badgeContent={4} color="error">
+            <Person2Icon />
+          </Badge>
+          <p style={{ marginLeft: "12px" }}> {t("navbar.profile")}</p>
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>
+          <LogoutIcon />
+          <p style={{ marginLeft: "12px" }}>{t("navbar.logout")}</p>
+        </MenuItem>
+        <Typography
+          sx={{
+            padding: "8px",
+            fontSize: "14px",
+            fontWeight: "bold",
+            color: "rgba(0, 0, 0, 0.54)",
+          }}>
+          {t("common.language")}
+        </Typography>
+        <ImageList
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}>
+          <ImageListItem
+            sx={{
+              border: "1px solid #fff",
+              "&:hover": {
+                border: "1px solid #ccc",
+              },
+            }}>
+            <img
+              style={{
+                cursor: "pointer",
+                width: "47px",
+                height: "25px",
+              }}
+              src={`${usSVG}`}
+            />
+          </ImageListItem>
+          <ImageListItem
+            sx={{
+              border: "1px solid #fff",
+              "&:hover": {
+                border: "1px solid #ccc",
+              },
+            }}>
+            <img
+              style={{
+                cursor: "pointer",
+                width: "47px",
+                height: "25px",
+              }}
+              src={`${viSVG}`}
+            />
+          </ImageListItem>
+        </ImageList>
+      </Box>
     </Menu>
   );
 
@@ -132,8 +205,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
         horizontal: "right",
       }}
       open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
+      onClose={handleMobileMenuClose}>
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
@@ -146,8 +218,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
-          color="inherit"
-        >
+          color="inherit">
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
           </Badge>
@@ -160,8 +231,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
-        >
+          color="inherit">
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -179,8 +249,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
             boxShadow: "none",
             borderBottom: "1px solid #e0e0e0",
           }}
-          position="static"
-        >
+          position="static">
           <Toolbar>
             <IconButton
               size="large"
@@ -188,24 +257,21 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
               color="inherit"
               aria-label="open drawer"
               sx={{ mr: 2 }}
-              onClick={broken ? setToggled : setCollapsed}
-            >
+              onClick={broken ? setToggled : setCollapsed}>
               <MenuIcon />
             </IconButton>
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
-            ></Typography>
+              sx={{ display: { xs: "none", sm: "block" } }}></Typography>
 
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <IconButton
                 size="large"
                 aria-label="show 4 new mails"
-                color="inherit"
-              >
+                color="inherit">
                 <Badge badgeContent={4} color="error">
                   <MailIcon />
                 </Badge>
@@ -213,8 +279,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
-                color="inherit"
-              >
+                color="inherit">
                 <Badge badgeContent={17} color="error">
                   <NotificationsIcon />
                 </Badge>
@@ -226,8 +291,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
                 aria-controls={menuId}
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
+                color="inherit">
                 <AccountCircle />
               </IconButton>
             </Box>
@@ -238,8 +302,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
                 aria-controls={mobileMenuId}
                 aria-haspopup="true"
                 onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
+                color="inherit">
                 <MoreIcon />
               </IconButton>
             </Box>
@@ -248,19 +311,18 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
         {renderMobileMenu}
         {renderMenu}
       </Box>
-      <div
-        style={{
+      <Box
+        sx={{
           position: "relative",
           height: 4,
           width: "100%",
-        }}
-      >
+        }}>
         {loading && (
           <LinearProgress
             sx={{ position: "absolute", top: 0, left: 0, right: 0 }}
           />
         )}
-      </div>
+      </Box>
     </>
   );
 };

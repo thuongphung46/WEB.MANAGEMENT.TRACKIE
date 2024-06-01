@@ -11,5 +11,9 @@
     "light": "Sáng",
     "dark": "Tối",
     "extra": "Thêm..."
+  },
+  "navbar": {
+    "profile": "Hồ sơ",
+    "logout": "Đăng xuất"
   }
 }

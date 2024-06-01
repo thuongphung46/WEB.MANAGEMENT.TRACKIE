@@ -11,5 +11,9 @@
     "light": "Light",
     "dark": "Dark",
     "extra": "Extra"
+  },
+  "navbar": {
+    "profile": "Profile",
+    "logout": "Logout"
   }
 }

@@ -17,6 +17,7 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "@common/*": ["src/common/*"],
       "@components/*": ["src/components/*"],
       "@constants/*": ["src/constants/*"],
@@ -24,7 +25,8 @@
       "@services/*": ["src/services/*"],
       "@routes/*": ["src/routes/*"],
       "@translations/*": ["src/translation/*"],
-      "@interfaces/*": ["src/interfaces/*"]
+      "@interfaces/*": ["src/interfaces/*"],
+      "@assets/*": ["src/assets/*"]
     }
   },
   "include": ["src"],
