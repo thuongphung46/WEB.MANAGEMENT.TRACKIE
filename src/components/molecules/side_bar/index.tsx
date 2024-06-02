@@ -14,9 +14,12 @@ import { SidebarHeader } from "./sidebar_header";
 import { SidebarFooter } from "./sidebar_footer";
 import { themes } from "@constants/themes/styles";
 import { Link, useLocation } from "react-router-dom";
-import { KeyValue } from "@constants/GlobalConstant";
+import { KEY_VALUE } from "@constants/GlobalConstant";
 import HRMStorage from "@common/function";
 import { t } from "i18next";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { userActions } from "@/redux/slices/userSlice";
+import { RootState } from "@/redux/store";
 
 // hex to rgba converter
 const hexToRgba = (hex: string, alpha: number) => {
@@ -39,7 +42,6 @@ interface SidebarProps {
   backgroundColor?: string;
   rootStyles?: React.CSSProperties;
   theme: "light" | "dark";
-  setTheme: (theme: "light" | "dark") => void;
 }
 
 export const Playground: React.FC<SidebarProps> = ({
@@ -47,14 +49,14 @@ export const Playground: React.FC<SidebarProps> = ({
   toggled,
   setToggled,
   onBreakPoint,
-  setTheme,
   theme,
 }) => {
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const [dissable, setDissable] = useState(false);
   const rtl = false;
   const hasImage = false;
-  const level = HRMStorage.get(KeyValue.Level);
+  const level = HRMStorage.get(KEY_VALUE.LEVEL);
 
   useEffect(() => {
     if (level !== "LEVEL_4") {
@@ -63,6 +65,13 @@ export const Playground: React.FC<SidebarProps> = ({
       setDissable(false);
     }
   }, [level, dissable]);
+  const handleThemeChange = useCallback(
+    (theme: "light" | "dark") => {
+      dispatch(userActions.setState({ theme: theme }));
+      HRMStorage.set(KEY_VALUE.THEME, theme);
+    },
+    [dispatch]
+  );
 
   const menuItemStyles: MenuItemStyles = {
     root: {
@@ -82,9 +91,9 @@ export const Playground: React.FC<SidebarProps> = ({
       backgroundColor:
         level === 0
           ? hexToRgba(
-            themes[theme].menu.menuContent,
-            hasImage && !collapsed ? 0.4 : 1
-          )
+              themes[theme].menu.menuContent,
+              hasImage && !collapsed ? 0.4 : 1
+            )
           : "transparent",
     }),
 
@@ -202,10 +211,10 @@ export const Playground: React.FC<SidebarProps> = ({
 
             <Menu menuItemStyles={menuItemStyles}>
               <SubMenu label={t("sidebar.theme")} icon={<DarkMode />}>
-                <MenuItem onClick={() => setTheme("dark")}>
+                <MenuItem onClick={() => handleThemeChange("dark")}>
                   {t("sidebar.dark")}
                 </MenuItem>
-                <MenuItem onClick={() => setTheme("light")}>
+                <MenuItem onClick={() => handleThemeChange("light")}>
                   {t("sidebar.light")}
                 </MenuItem>
               </SubMenu>
