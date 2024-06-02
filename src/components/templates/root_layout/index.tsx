@@ -2,17 +2,19 @@ import { Box } from "@mui/material";
 import HRMStorage from "@common/function";
 import { PrimarySearchAppBar } from "@components/molecules/navbar";
 import { Playground } from "@components/molecules/side_bar";
-import { KeyValue } from "@constants/GlobalConstant";
+import { KEY_VALUE } from "@constants/GlobalConstant";
 import React, { useCallback, useEffect } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { useAppSelector } from "@/redux/hook";
+import { RootState } from "@/redux/store";
 type Theme = "light" | "dark";
 const RootLayout = () => {
   const navigate = useNavigate();
+  const { theme } = useAppSelector((state: RootState) => state.user);
   const [collapsed, setCollapsed] = React.useState(false);
   const [toggled, setToggled] = React.useState(false);
   const [broken, setBroken] = React.useState(false);
-  const [theme, setTheme] = React.useState<Theme>("light");
-  // const currentUser = Boolean(HRMStorage.get(KeyValue.TokenKey));
+
   const currentUser = true;
 
   useEffect(() => {
@@ -29,10 +31,6 @@ const RootLayout = () => {
 
   const handleBroken = useCallback((e: boolean) => {
     setBroken(e);
-  }, []);
-
-  const handleTheme = useCallback((e: Theme) => {
-    setTheme(e);
   }, []);
 
   if (currentUser) {
@@ -52,7 +50,6 @@ const RootLayout = () => {
           setToggled={handleToggled}
           toggled={toggled}
           onBreakPoint={handleBroken}
-          setTheme={handleTheme}
           theme={theme}
         />
         <Box
