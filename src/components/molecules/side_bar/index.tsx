@@ -82,9 +82,9 @@ export const Playground: React.FC<SidebarProps> = ({
       backgroundColor:
         level === 0
           ? hexToRgba(
-              themes[theme].menu.menuContent,
-              hasImage && !collapsed ? 0.4 : 1
-            )
+            themes[theme].menu.menuContent,
+            hasImage && !collapsed ? 0.4 : 1
+          )
           : "transparent",
     }),
 

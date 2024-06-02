@@ -1,11 +1,9 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -24,45 +22,6 @@ import HRMStorage from "@/common/function";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { userActions } from "@/redux/slices/userSlice";
 import { useConfirm } from "material-ui-confirm";
-
-export const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-
-export const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-export const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
 
 interface PrimarySearchAppBarProps {
   setCollapsed: () => void;
@@ -167,7 +126,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
             padding: "8px",
             fontSize: "14px",
             fontWeight: "bold",
-            color: "rgba(0, 0, 0, 0.54)",
+            // color: "rgba(0, 0, 0, 0.54)",
           }}>
           {t("common.language")}
         </Typography>
@@ -233,7 +192,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}>
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+        <IconButton size="large" aria-label="show 4 new mails" >
           <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
@@ -243,8 +202,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="show 17 new notifications"
-          color="inherit">
+          aria-label="show 17 new notifications">
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
           </Badge>
@@ -256,8 +214,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
           size="large"
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit">
+          aria-haspopup="true">
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -270,7 +227,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
       <Box sx={{ flexGrow: 1 }}>
         <AppBar
           sx={{
-            backgroundColor: "white",
+            backgroundColor: "transparent",
             color: "black",
             boxShadow: "none",
             borderBottom: "1px solid #e0e0e0",
@@ -280,7 +237,6 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
             <IconButton
               size="large"
               edge="start"
-              color="inherit"
               aria-label="open drawer"
               sx={{ mr: 2 }}
               onClick={broken ? setToggled : setCollapsed}>
@@ -297,7 +253,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
               <IconButton
                 size="large"
                 aria-label="show 4 new mails"
-                color="inherit">
+              >
                 <Badge badgeContent={4} color="error">
                   <MailIcon />
                 </Badge>
@@ -305,7 +261,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
-                color="inherit">
+              >
                 <Badge badgeContent={17} color="error">
                   <NotificationsIcon />
                 </Badge>
@@ -317,7 +273,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
                 aria-controls={menuId}
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
-                color="inherit">
+              >
                 <AccountCircle />
               </IconButton>
             </Box>
@@ -328,7 +284,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
                 aria-controls={mobileMenuId}
                 aria-haspopup="true"
                 onClick={handleMobileMenuOpen}
-                color="inherit">
+              >
                 <MoreIcon />
               </IconButton>
             </Box>
