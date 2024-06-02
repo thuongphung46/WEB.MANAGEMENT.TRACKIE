@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@redux/store";
 
 export interface IUserState {
@@ -13,8 +13,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    //actions setState bất kì
-    setState: (state, action) => {
+    setState: (state, action: PayloadAction<Partial<IUserState>>) => {
       return { ...state, ...action.payload };
     },
   },
