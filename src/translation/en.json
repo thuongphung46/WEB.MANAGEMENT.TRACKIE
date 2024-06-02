@@ -14,7 +14,15 @@
   },
   "navbar": {
     "profile": "Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "confirm": {
+      "logout_description": "Are you sure you want to logout?",
+      "logout_title": "Confirm logout",
+      "switch_language_title": "Confirm switch language",
+      "switch_language_description": "Are you sure you want to switch language?",
+      "ok": "Ok",
+      "cancel": "Cancel"
+    }
   },
   "datagrid": {
     "index": "index",

@@ -14,7 +14,15 @@
   },
   "navbar": {
     "profile": "Hồ sơ",
-    "logout": "Đăng xuất"
+    "logout": "Đăng xuất",
+    "confirm": {
+      "logout_description": "Bạn có chắc chắn muốn đăng xuất không?",
+      "logout_title": "Xác nhận đăng xuất",
+      "switch_language_title": "Xác nhận chuyển ngôn ngữ",
+      "switch_language_description": "Bạn có chắc chắn muốn chuyển ngôn ngữ không?",
+      "ok": "Đồng ý",
+      "cancel": "Hủy"
+    }
   },
   "datagrid": {
     "index": "STT",

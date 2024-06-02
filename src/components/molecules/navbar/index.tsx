@@ -17,11 +17,13 @@ import Person2Icon from "@mui/icons-material/Person2";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useAppSelector } from "../../../redux/hook";
 import { ImageList, ImageListItem } from "@mui/material";
 import { usSVG, viSVG } from "@assets/index";
 import { t } from "i18next";
 import HRMStorage from "@/common/function";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { userActions } from "@/redux/slices/userSlice";
+import { useConfirm } from "material-ui-confirm";
 
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -75,6 +77,9 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
   setToggled,
   broken,
 }) => {
+  const confirm = useConfirm();
+  const dispatch = useAppDispatch();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { loading } = useAppSelector((state) => state.loading);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -83,10 +88,30 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const switchLanguage = React.useCallback(
+    (language: "en" | "vi") => {
+      confirm({
+        title: t("navbar.confirm.switch_language_title"),
+        description: t("navbar.confirm.switch_language_description"),
+        confirmationText: t("navbar.confirm.ok"),
+        cancellationText: t("navbar.confirm.cancel"),
+      }).then(() => {
+        dispatch(userActions.setState({ language }));
+      });
+    },
+    [confirm, dispatch]
+  );
   const handleLogout = React.useCallback(() => {
-    HRMStorage.clear();
-    window.location.href = "/login";
-  }, []);
+    confirm({
+      title: t("navbar.confirm.logout_title"),
+      description: t("navbar.confirm.logout_description"),
+      confirmationText: t("navbar.confirm.ok"),
+      cancellationText: t("navbar.confirm.cancel"),
+    }).then(() => {
+      HRMStorage.clear();
+      window.location.reload();
+    });
+  }, [confirm]);
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -153,6 +178,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
             justifyContent: "center",
           }}>
           <ImageListItem
+            onClick={() => switchLanguage("en")}
             sx={{
               border: "1px solid #fff",
               "&:hover": {
@@ -169,6 +195,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
             />
           </ImageListItem>
           <ImageListItem
+            onClick={() => switchLanguage("vi")}
             sx={{
               border: "1px solid #fff",
               "&:hover": {
