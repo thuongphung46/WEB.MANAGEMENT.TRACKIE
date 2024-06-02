@@ -3,10 +3,12 @@ import { RootState } from "@redux/store";
 
 export interface IUserState {
   language: "en" | "vi";
+  theme?: "light" | "dark";
 }
 
 const initialState: IUserState = {
   language: "vi",
+  theme: "light",
 };
 
 const userSlice = createSlice({
