@@ -45,6 +45,7 @@ export const BaseGrid: FC<BaseGridProps> = ({
   rows,
   onDel,
   disable,
+  slots,
   ...rest
 }) => {
   const confirm = useConfirm();
@@ -209,6 +210,7 @@ export const BaseGrid: FC<BaseGridProps> = ({
         onRowSelectionModelChange={onRowSelectionChange}
         rowSelectionModel={selectedRows}
         slots={{
+          ...slots,
           toolbar: EditToolbar,
         }}
         slotProps={{
