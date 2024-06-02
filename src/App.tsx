@@ -44,16 +44,23 @@ const getDesignTokens = (mode: PaletteMode) => ({
 
 function App() {
   const dispatch = useAppDispatch();
-  const themeLocalStorage: any = HRMStorage.get(KEY_VALUE.THEME);
+
   const { theme } = useAppSelector((state: RootState) => state.user);
   const themeMode: PaletteMode = theme || "light";
   const darkModeTheme = createTheme(getDesignTokens(themeMode));
 
   useEffect(() => {
-    if (themeLocalStorage) {
-      dispatch(userActions.setState({ theme: themeLocalStorage }));
-    }
-  }, [dispatch, themeLocalStorage]);
+    const fetchData = async () => {
+      const theme = (await HRMStorage.get(KEY_VALUE.THEME)) as "light" | "dark";
+      const language = (await HRMStorage.get(KEY_VALUE.LANGUAGE)) as
+        | "vi"
+        | "en";
+      if (theme) {
+        dispatch(userActions.setState({ theme, language }));
+      }
+    };
+    fetchData();
+  }, [dispatch]);
 
   return (
     <>

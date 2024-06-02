@@ -10,7 +10,20 @@
     "theme": "Chủ đề",
     "light": "Sáng",
     "dark": "Tối",
-    "extra": "Thêm..."
+    "extra": "Thêm...",
+    "module": "Mô-đun",
+    "menu": {
+      "home": "Trang chủ",
+      "manga": "Truyện tranh",
+      "list_manga": "Danh sách truyện",
+      "add_manga": "Thêm truyện",
+      "category": "Thể loại",
+      "list_category": "Danh sách thể loại",
+      "add_category": "Thêm thể loại",
+      "user": "Người dùng",
+      "list_user": "Danh sách người dùng",
+      "add_user": "Thêm người dùng"
+    }
   },
   "navbar": {
     "profile": "Hồ sơ",
