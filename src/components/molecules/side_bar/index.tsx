@@ -64,11 +64,6 @@ export const Playground: React.FC<SidebarProps> = ({
     }
   }, [level, dissable]);
 
-  const handleLogout = useCallback(() => {
-    HRMStorage.clear();
-    window.location.href = "/login";
-  }, []);
-
   const menuItemStyles: MenuItemStyles = {
     root: {
       fontSize: "13px",
@@ -214,7 +209,6 @@ export const Playground: React.FC<SidebarProps> = ({
                   {t("sidebar.light")}
                 </MenuItem>
               </SubMenu>
-              <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
             </Menu>
           </div>
 
