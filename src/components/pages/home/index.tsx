@@ -1,9 +1,9 @@
-export const HomePage = () => {
-    return (
-        <div>
-            <h1>home
+import { HomeTemplate } from "@components/templates/home";
 
-            </h1>
-        </div>
-    );
+export const HomePage = () => {
+  return (
+    <div>
+      <HomeTemplate />
+    </div>
+  );
 };

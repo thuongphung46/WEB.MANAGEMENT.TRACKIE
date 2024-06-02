@@ -15,5 +15,30 @@
   "navbar": {
     "profile": "Hồ sơ",
     "logout": "Đăng xuất"
+  },
+  "datagrid": {
+    "index": "STT",
+    "button": {
+      "add_record": "Thêm mới",
+      "edit": "Chỉnh sửa",
+      "delete": "Xóa",
+      "save": "Lưu",
+      "cancel": "Hủy"
+    },
+    "confirm": {
+      "delete_description": "Bạn có chắc chắn muốn xóa dữ liệu này không?",
+      "delete_title": "Xác nhận xóa",
+      "ok": "Đồng ý",
+      "cancel": "Hủy"
+    }
+  },
+  "list_manga": {
+    "table": {
+      "title": "Tiêu đề",
+      "author": "Tác giả",
+      "status": "Trạng thái",
+      "created_at": "Ngày tạo",
+      "updated_at": "Ngày cập nhật"
+    }
   }
 }

@@ -22,6 +22,7 @@ export default defineConfig({
       "@routes": path.resolve(__dirname, "./src/routes"),
       "@interfaces": path.resolve(__dirname, "./src/interfaces"),
       "@assets": path.resolve(__dirname, "./src/assets"),
+      "@data": path.resolve(__dirname, "./src/data"),
     },
   },
 });
