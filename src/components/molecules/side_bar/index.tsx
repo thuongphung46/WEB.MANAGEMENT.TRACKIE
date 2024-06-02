@@ -116,6 +116,19 @@ export const Playground: React.FC<SidebarProps> = ({
     },
   };
 
+  const menuItems = [
+    { path: "/home", label: "sidebar.menu.home" },
+    { path: "/manga", label: "sidebar.menu.manga" },
+    { path: "/list_manga", label: "sidebar.menu.list_manga" },
+    { path: "/add_manga", label: "sidebar.menu.add_manga" },
+    { path: "/category", label: "sidebar.menu.category" },
+    { path: "/list_category", label: "sidebar.menu.list_category" },
+    { path: "/add_category", label: "sidebar.menu.add_category" },
+    { path: "/user", label: "sidebar.menu.user" },
+    { path: "/list_user", label: "sidebar.menu.list_user" },
+    { path: "/add_user", label: "sidebar.menu.add_user" },
+  ];
+
   return (
     <div
       style={{
@@ -155,40 +168,22 @@ export const Playground: React.FC<SidebarProps> = ({
                 }}></Typography>
             </div>
             <Menu menuItemStyles={menuItemStyles}>
-              <SubMenu label="Mô-đun" icon={<Diamond />}>
-                <MenuItem
-                  active={location.pathname.startsWith("/model")}
-                  component={<Link to={"/model"}></Link>}>
-                  Mô hình cấp quản lý
-                </MenuItem>
-
-                <MenuItem
-                  active={location.pathname.startsWith("/detail_employee")}
-                  component={<Link to={"/detail_employee"}></Link>}>
-                  Danh sách nhân viên
-                </MenuItem>
-                <MenuItem
-                  active={location.pathname.startsWith("/import")}
-                  component={<Link to={"/import"}></Link>}>
-                  Nhập dữ liệu
-                </MenuItem>
-                <MenuItem
-                  active={location.pathname.startsWith("/general")}
-                  component={<Link to={"/general"}></Link>}>
-                  Thông tin chung
-                </MenuItem>
-                <MenuItem
-                  active={location.pathname.startsWith("/statistic")}
-                  component={<Link to={"/statistic"}></Link>}>
-                  Thống kê
-                </MenuItem>
-                {!dissable && (
+              <SubMenu label={t("sidebar.module")} icon={<Diamond />}>
+                {menuItems.map((item) => (
+                  <MenuItem
+                    key={item.path}
+                    active={location.pathname.startsWith(item.path)}
+                    component={<Link to={item.path}></Link>}>
+                    {t(item.label)}
+                  </MenuItem>
+                ))}
+                {/* {!dissable && (
                   <MenuItem
                     active={location.pathname.startsWith("/active_page")}
                     component={<Link to={"/active_page"}></Link>}>
                     Duyệt nhân viên
                   </MenuItem>
-                )}
+                )} */}
               </SubMenu>
             </Menu>
 

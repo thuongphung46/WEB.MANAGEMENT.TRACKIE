@@ -22,6 +22,7 @@ import HRMStorage from "@/common/function";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { userActions } from "@/redux/slices/userSlice";
 import { useConfirm } from "material-ui-confirm";
+import { KEY_VALUE } from "@/constants/GlobalConstant";
 
 interface PrimarySearchAppBarProps {
   setCollapsed: () => void;
@@ -56,6 +57,8 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
         cancellationText: t("navbar.confirm.cancel"),
       }).then(() => {
         dispatch(userActions.setState({ language }));
+        HRMStorage.set(KEY_VALUE.LANGUAGE, language);
+        window.location.reload();
       });
     },
     [confirm, dispatch]
@@ -192,7 +195,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}>
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" >
+        <IconButton size="large" aria-label="show 4 new mails">
           <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
@@ -200,9 +203,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications">
+        <IconButton size="large" aria-label="show 17 new notifications">
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
           </Badge>
@@ -250,18 +251,12 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
 
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-              >
+              <IconButton size="large" aria-label="show 4 new mails">
                 <Badge badgeContent={4} color="error">
                   <MailIcon />
                 </Badge>
               </IconButton>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-              >
+              <IconButton size="large" aria-label="show 17 new notifications">
                 <Badge badgeContent={17} color="error">
                   <NotificationsIcon />
                 </Badge>
@@ -272,8 +267,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
                 aria-label="account of current user"
                 aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-              >
+                onClick={handleProfileMenuOpen}>
                 <AccountCircle />
               </IconButton>
             </Box>
@@ -283,8 +277,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
                 aria-label="show more"
                 aria-controls={mobileMenuId}
                 aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-              >
+                onClick={handleMobileMenuOpen}>
                 <MoreIcon />
               </IconButton>
             </Box>

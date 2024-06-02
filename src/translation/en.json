@@ -10,7 +10,20 @@
     "theme": "Theme",
     "light": "Light",
     "dark": "Dark",
-    "extra": "Extra"
+    "extra": "Extra",
+    "module": "Module",
+    "menu": {
+      "home": "Home",
+      "manga": "Manga",
+      "list_manga": "List manga",
+      "add_manga": "Add manga",
+      "category": "Category",
+      "list_category": "List category",
+      "add_category": "Add category",
+      "user": "User",
+      "list_user": "List user",
+      "add_user": "Add user"
+    }
   },
   "navbar": {
     "profile": "Profile",
