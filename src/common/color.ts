@@ -1,4 +1,4 @@
-export const Colors = {
+const Colors = {
   primary: "#428CD4",
   primaryDark: "#004578",
   white: "#ffffff",
@@ -9,3 +9,9 @@ export const Colors = {
   green: "#008000",
   red: "#FF0000",
 };
+
+const GlobalStyle = {
+  H_NAVBAR_MAX: "64px",
+  H_NAVBAR_MIN: "56px",
+};
+export { Colors, GlobalStyle };
