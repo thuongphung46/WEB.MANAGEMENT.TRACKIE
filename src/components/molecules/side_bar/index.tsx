@@ -20,6 +20,7 @@ import { t } from "i18next";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { userActions } from "@/redux/slices/userSlice";
 import { RootState } from "@/redux/store";
+import { menuItems } from "./index.path";
 
 // hex to rgba converter
 const hexToRgba = (hex: string, alpha: number) => {
@@ -91,9 +92,9 @@ export const Playground: React.FC<SidebarProps> = ({
       backgroundColor:
         level === 0
           ? hexToRgba(
-              themes[theme].menu.menuContent,
-              hasImage && !collapsed ? 0.4 : 1
-            )
+            themes[theme].menu.menuContent,
+            hasImage && !collapsed ? 0.4 : 1
+          )
           : "transparent",
     }),
 
@@ -116,18 +117,6 @@ export const Playground: React.FC<SidebarProps> = ({
     },
   };
 
-  const menuItems = [
-    { path: "/home", label: "sidebar.menu.home" },
-    { path: "/manga", label: "sidebar.menu.manga" },
-    { path: "/list_manga", label: "sidebar.menu.list_manga" },
-    { path: "/add_manga", label: "sidebar.menu.add_manga" },
-    { path: "/category", label: "sidebar.menu.category" },
-    { path: "/list_category", label: "sidebar.menu.list_category" },
-    { path: "/add_category", label: "sidebar.menu.add_category" },
-    { path: "/user", label: "sidebar.menu.user" },
-    { path: "/list_user", label: "sidebar.menu.list_user" },
-    { path: "/add_user", label: "sidebar.menu.add_user" },
-  ];
 
   return (
     <div
