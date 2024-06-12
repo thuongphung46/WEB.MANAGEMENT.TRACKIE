@@ -22,7 +22,9 @@
       "add_category": "Add category",
       "user": "User",
       "list_user": "List user",
-      "add_user": "Add user"
+      "add_user": "Add user",
+      "author": "Author",
+      "character": "Character"
     }
   },
   "navbar": {

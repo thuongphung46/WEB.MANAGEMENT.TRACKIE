@@ -22,6 +22,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { userActions } from "@/redux/slices/userSlice";
 import { useConfirm } from "material-ui-confirm";
 import { KEY_VALUE } from "@/constants/GlobalConstant";
+import { GlobalStyle } from "@/common/color";
+import useWindowDimensions from "@/hook/useWindownDimensions";
 
 interface PrimarySearchAppBarProps {
   setCollapsed: () => void;
@@ -38,6 +40,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
 }) => {
   const confirm = useConfirm();
   const dispatch = useAppDispatch();
+  const { width } = useWindowDimensions()
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { loading } = useAppSelector((state) => state.loading);
@@ -230,6 +233,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
             color: "black",
             boxShadow: "none",
             borderBottom: "1px solid #e0e0e0",
+            height: width < 600 ? GlobalStyle.H_NAVBAR_MIN : GlobalStyle.H_NAVBAR_MAX,
           }}
           position="static">
           <Toolbar>

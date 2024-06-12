@@ -27,7 +27,8 @@
       "@translations/*": ["src/translation/*"],
       "@interfaces/*": ["src/interfaces/*"],
       "@assets/*": ["src/assets/*"],
-      "@data/*": ["src/data/*"]
+      "@data/*": ["src/data/*"],
+      "@hooks/*": ["src/hooks/*"]
     }
   },
   "include": ["src"],
