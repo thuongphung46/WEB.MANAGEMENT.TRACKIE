@@ -1,4 +1,4 @@
-import { ICharacter } from "@/interfaces/charactor";
+import { ICharacter } from "@/interfaces/character";
 import { Request } from "./request";
 
 const Controller = "characters"; //nhân vật
