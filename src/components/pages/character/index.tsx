@@ -1,6 +1,6 @@
 import { useGetListCharacter } from "@/hook/useGetListCharacter";
-import { ICharacter } from "@/interfaces/charactor";
-import { CharactorTemplate } from "@components/templates/charactor";
+import { ICharacter } from "@/interfaces/character";
+import { CharactorTemplate } from "@/components/templates/character";
 import { useEffect, useState } from "react";
 
 export const CharactorPage = () => {

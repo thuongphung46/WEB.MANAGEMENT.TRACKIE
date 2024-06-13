@@ -1,6 +1,6 @@
 import { IFormState } from "@/interfaces/action";
-import { ICharactor } from "@/interfaces/charactor";
+import { ICharacter } from "@/interfaces/character";
 
 export interface CharactorTemplateProps extends IFormState {
-  data: ICharactor[];
+  data: ICharacter[];
 }

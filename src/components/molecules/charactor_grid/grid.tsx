@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import { BaseGrid } from "@components/atoms/datagrid";
 import { columns } from "@/components/molecules/charactor_grid/columns";
 import LinearProgress from "@mui/material/LinearProgress";
-import { ICharacter } from "@/interfaces/charactor";
+import { ICharacter } from "@/interfaces/character";
 
 interface Props {
   dataSource: ICharacter[];
