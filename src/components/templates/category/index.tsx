@@ -1,14 +1,15 @@
 import { FC } from "react";
 import { CategoryTemplateProps } from "./index.interface";
-
-
+import Box from "@mui/material/Box";
+import { ListCategory } from "@/components/molecules/category_grid/grid";
 
 export const CategoryTemplate: FC<CategoryTemplateProps> = ({
-    action
+  action,
+  data,
 }) => {
-    return (
-        <div>
-            list category
-        </div>
-    );
+  return (
+    <Box>
+      <ListCategory dataSource={data}></ListCategory>
+    </Box>
+  );
 };

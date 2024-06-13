@@ -3,12 +3,8 @@ export interface AppConfig {
   DEFAULT_API_INTERVAL: number;
 }
 
+const gwUrl = import.meta.env.VITE_GATEWAY_URL;
 export const APP_CONFIG: AppConfig = {
-  API_URL: 'https://hrmactvn.id.vn/api',
-  DEFAULT_API_INTERVAL: 60000
-};
-
-export const GatewayRoute = {
-  production_planning: 'productionplanning',
-  production: 'production'
+  API_URL: `${gwUrl}/api`,
+  DEFAULT_API_INTERVAL: 60000,
 };
