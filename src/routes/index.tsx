@@ -6,7 +6,7 @@ import { HomePage } from "@components/pages/home";
 import { ManganPage } from "@components/pages/manga";
 import { AuthorPage } from "@components/pages/author";
 import { CategoryPage } from "@components/pages/category";
-import { CharactorPage } from "@components/pages/charactor";
+import { CharactorPage } from "@/components/pages/character";
 
 
 interface PropType {
