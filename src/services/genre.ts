@@ -3,6 +3,9 @@ import { Request } from "./request";
 
 const Controller = "genres"; //thể loại
 export const GenresService = {
+  GetList: async () => {
+    return await Request(Controller).getAsync("");
+  },
   GetById: async (id: string) => {
     return await Request(Controller).getAsync(`${id}`);
   },

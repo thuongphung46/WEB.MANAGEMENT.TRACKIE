@@ -1,9 +1,8 @@
 import axios, { HttpStatusCode } from "axios";
-import { KEY_VALUE } from "@constants/GlobalConstant";
+import GlobalConstant, { KEY_VALUE } from "@constants/GlobalConstant";
 import { APP_CONFIG } from "@constants/app_config";
 import { MESSAGE_CODE } from "../interfaces/enum";
 import { GlobalData } from "@constants/global_data";
-import HRMStorage from "@common/function";
 
 const baseUrl = APP_CONFIG.API_URL;
 const INVALID_TOKEN = [401, 403, 404, 405, 406, 407, 203];
@@ -49,7 +48,7 @@ const composeUri = (controller: string, action: string, obj: any) => {
       controllerName = "/" + controller;
     }
     if (obj === null || obj === undefined) {
-      return controllerName + "/" + action;
+      return controllerName + action;
     }
     for (const key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -64,10 +63,11 @@ const composeUri = (controller: string, action: string, obj: any) => {
 };
 
 const getResponseData = (response: any) => {
-  const data = JSON.parse(response.data);
-  data.msg_info = {
-    message: data.message,
-    msg_code: data.msg_code,
+  let data: any = {};
+  data = {
+    message: "success",
+    msg_code: 200,
+    content: JSON.parse(response.data),
   };
   return data;
 };
@@ -82,7 +82,7 @@ interface RequestHandleParams {
 const requestHandle = async (data: RequestHandleParams) => {
   try {
     const { controller, action, params, method } = data;
-    const jwt = await HRMStorage.get(KEY_VALUE.TOKEN);
+    const jwt = GlobalConstant.TOKEN;
     // const lang = await PxStorage.get(PX_CONSTANTS.LANGUAGE);
     const paramsUri = method === "get" ? params : {};
     const uri = composeUri(controller, action, paramsUri);
