@@ -253,7 +253,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
 
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <IconButton size="large" aria-label="show 4 new mails">
+              {/* <IconButton size="large" aria-label="show 4 new mails">
                 <Badge badgeContent={4} color="error">
                   <MailIcon />
                 </Badge>
@@ -262,7 +262,7 @@ export const PrimarySearchAppBar: React.FC<PrimarySearchAppBarProps> = ({
                 <Badge badgeContent={17} color="error">
                   <NotificationsIcon />
                 </Badge>
-              </IconButton>
+              </IconButton> */}
               <IconButton
                 size="large"
                 edge="end"

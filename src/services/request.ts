@@ -88,7 +88,7 @@ const requestHandle = async (data: RequestHandleParams) => {
     const uri = composeUri(controller, action, paramsUri);
     const requestMethod = axiosInstance[method];
     const headerConfig = {
-      Authorization: `Bearer ${jwt}`,
+      mock: `${jwt}`,
       // Language: lang,
     };
     return await (method === "get" || method === "delete"

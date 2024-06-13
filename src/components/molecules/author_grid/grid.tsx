@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import Box from "@mui/material/Box";
 import { BaseGrid } from "@components/atoms/datagrid";
 // import { columns } from "@/components/molecules/author_grid/columns";
@@ -6,6 +6,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { IAuthor } from "@/interfaces/author";
 import { GridColDef } from "@mui/x-data-grid";
 import Avatar from '@mui/material/Avatar';
+import { AuthorService } from "@/services/author";
 
 interface Props {
   dataSource: IAuthor[];
@@ -56,6 +57,9 @@ export const ListAuthor: FC<Props> = ({ dataSource }) => {
 
     }
   ];
+  const handlDelete = useCallback((id: string) => {
+    AuthorService.Delete(id)
+  }, []);
 
   return (
     <Box>
@@ -66,6 +70,7 @@ export const ListAuthor: FC<Props> = ({ dataSource }) => {
         }}
         columns={columns}
         rows={dataSource}
+        onDel={handlDelete}
         slots={{
           loadingOverlay: LinearProgress,
         }}
