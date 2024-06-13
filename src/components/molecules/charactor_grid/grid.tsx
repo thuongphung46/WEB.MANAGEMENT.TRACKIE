@@ -1,17 +1,18 @@
 import { FC } from "react";
 import Box from "@mui/material/Box";
 import { BaseGrid } from "@components/atoms/datagrid";
-import { columns } from "@components/molecules/home/list_manga/columns";
+import { columns } from "@/components/molecules/charactor_grid/columns";
 import LinearProgress from "@mui/material/LinearProgress";
+import { ICharactor } from "@/interfaces/charactor";
 
 interface Props {
-  dataSource: any[];
+  dataSource: ICharactor[];
 }
 
-export const ListManga: FC<Props> = ({ dataSource }) => {
+export const ListCharacter: FC<Props> = ({ dataSource }) => {
   return (
     <Box>
-      {/* <BaseGrid
+      <BaseGrid
         sx={{
           height: "calc(100vh - 90px)",
           width: "100%",
@@ -21,8 +22,8 @@ export const ListManga: FC<Props> = ({ dataSource }) => {
         slots={{
           loadingOverlay: LinearProgress,
         }}
-        loading={dataSource.length === 0 ? true : false}
-      /> */}
+        // loading={dataSource.length === 0 ? true : false}
+      />
     </Box>
   );
 };

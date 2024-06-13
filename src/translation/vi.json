@@ -57,11 +57,43 @@
   },
   "list_manga": {
     "table": {
-      "title": "Tiêu đề",
-      "author": "Tác giả",
-      "status": "Trạng thái",
-      "created_at": "Ngày tạo",
-      "updated_at": "Ngày cập nhật"
+      "name": "Tên truyện",
+      "description": "Chi tiết",
+      "synopsis": "Tóm tắt",
+      "image": "Hình ảnh",
+      "genreIds": "Thể loại",
+      "authorIds": "Tác giả",
+      "characterIds": "Nhân vật"
+    }
+  },
+  "list_author": {
+    "table": {
+      "name": "Tên tác giả",
+      "birthday": "Ngày sinh",
+      "place": "Nơi sinh",
+      "bio": "Tiểu sử",
+      "image": "Hình ảnh"
+    }
+  },
+  "list_category": {
+    "table": {
+      "name": "Tên thể loại",
+      "code": "Mã"
+    }
+  },
+  "list_charactor": {
+    "table": {
+      "name": "Tên nhân vật",
+      "birthday": "Ngày sinh",
+      "sign": "Cung hoàng đạo",
+      "height": "Chiều cao",
+      "weight": "Cân nặng",
+      "bloodType": "Nhóm máu",
+      "shoeSize": "Cỡ giày",
+      "favoriteFood": "Món ăn yêu thích",
+      "dislikes": "Không thích",
+      "bio": "Tiểu sử",
+      "image": "Hình ảnh"
     }
   }
 }

@@ -57,11 +57,43 @@
   },
   "list_manga": {
     "table": {
-      "title": "Title",
-      "author": "Author",
-      "status": "Status",
-      "created_at": "Created at",
-      "updated_at": "Updated at"
+      "name": "Name",
+      "description": "Description",
+      "synopsis": "Synopsis",
+      "image": "Image",
+      "genreIds": "Genre",
+      "authorIds": "Author",
+      "characterIds": "Character"
+    }
+  },
+  "list_author": {
+    "table": {
+      "name": "Name",
+      "birthday": "Birthday",
+      "place": "Place",
+      "bio": "Bio",
+      "image": "Image"
+    }
+  },
+  "list_category": {
+    "table": {
+      "name": "Name",
+      "code": "Code"
+    }
+  },
+  "list_charactor": {
+    "table": {
+      "name": "Name",
+      "birthday": "Birthday",
+      "sign": "Sign",
+      "height": "Height",
+      "weight": "Weight",
+      "bloodType": "Blood type",
+      "shoeSize": "Shoe size",
+      "favoriteFood": "Favorite food",
+      "dislikes": "Dislikes",
+      "bio": "Bio",
+      "image": "Image"
     }
   }
 }
