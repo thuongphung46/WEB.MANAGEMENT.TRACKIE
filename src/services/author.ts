@@ -2,7 +2,10 @@ import { IAuthor } from "@/interfaces/author";
 import { Request } from "./request";
 
 const Controller = "authors"; //tác giả
-export const GenresService = {
+export const AuthorService = {
+  GetList: async () => {
+    return await Request(Controller).getAsync("");
+  },
   GetById: async (id: string) => {
     return await Request(Controller).getAsync(`${id}`);
   },

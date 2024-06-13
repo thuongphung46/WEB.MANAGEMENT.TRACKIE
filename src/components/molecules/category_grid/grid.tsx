@@ -22,7 +22,7 @@ export const ListCategory: FC<Props> = ({ dataSource }) => {
         slots={{
           loadingOverlay: LinearProgress,
         }}
-        // loading={dataSource.length === 0 ? true : false}
+        loading={dataSource.length === 0 ? true : false}
       />
     </Box>
   );

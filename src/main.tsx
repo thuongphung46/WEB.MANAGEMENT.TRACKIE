@@ -6,10 +6,8 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import "./translation/i18n"
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<Provider store={store}>
-  <React.StrictMode>
-
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <Provider store={store}>
     <App />
-
-  </React.StrictMode> </Provider>,
+  </Provider>,
 )

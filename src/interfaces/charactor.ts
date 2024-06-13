@@ -1,4 +1,4 @@
-export interface ICharactor {
+export interface ICharacter {
   name?: string;
   birthday?: string;
   sign?: string;
