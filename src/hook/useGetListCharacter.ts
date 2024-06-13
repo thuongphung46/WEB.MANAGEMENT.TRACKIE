@@ -1,4 +1,4 @@
-import { ICharacter } from "@/interfaces/charactor";
+import { ICharacter } from "@/interfaces/character";
 import { MESSAGE_CODE } from "@/interfaces/enum";
 import { CharacterService } from "@/services/charactor";
 import { useEffect, useState } from "react";
