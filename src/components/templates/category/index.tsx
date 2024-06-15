@@ -5,11 +5,12 @@ import { ListCategory } from "@/components/molecules/category_grid/grid";
 
 export const CategoryTemplate: FC<CategoryTemplateProps> = ({
   action,
-  data,
+  dataSource,
+  setState
 }) => {
   return (
     <Box>
-      <ListCategory dataSource={data}></ListCategory>
+      <ListCategory dataSource={dataSource} setState={setState} ></ListCategory>
     </Box>
   );
 };

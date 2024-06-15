@@ -12,6 +12,7 @@ import HRMStorage from "./common/function";
 import { KEY_VALUE } from "./constants/GlobalConstant";
 import { useEffect } from "react";
 import { userActions } from "./redux/slices/userSlice";
+import "react-toastify/dist/ReactToastify.css";
 
 const getDesignTokens = (mode: PaletteMode) => ({
   palette: {

@@ -6,6 +6,14 @@
     "vi": "Tiếng Việt",
     "view_code": "Xem mã nguồn"
   },
+  "toast_message": {
+    "add_success": "Thêm thành công",
+    "add_fail": "Thêm thất bại",
+    "update_success": "Chỉnh sửa thành công",
+    "update_fail": "Chỉnh sửa thất bại",
+    "delete_success": "Xóa thành công",
+    "delete_fail": "Xóa thất bại"
+  },
   "sidebar": {
     "theme": "Chủ đề",
     "light": "Sáng",

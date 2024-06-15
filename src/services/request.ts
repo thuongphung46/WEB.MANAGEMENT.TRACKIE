@@ -11,21 +11,11 @@ const CANNOT_CONNECT_API: any = {
   message: "Không kết nối được hệ thống, vui lòng thử lại sau",
   msg_code: -1,
   content: null,
-  msg_info: {
-    message: "Không kết nối được hệ thống, vui lòng thử lại sau",
-    msg_code: -1,
-    msg_detail: undefined,
-  },
 };
 const INVALID_TOKEN_MSG: any = {
   message: "Phiên làm việc hết hạn",
   msg_code: -401,
   content: null,
-  msg_info: {
-    message: "Phiên làm việc hết hạn",
-    msg_code: -401,
-    msg_detail: undefined,
-  },
 };
 
 const axiosInstance = axios.create({
@@ -63,11 +53,11 @@ const composeUri = (controller: string, action: string, obj: any) => {
 };
 
 const getResponseData = (response: any) => {
-  let data: any = {};
-  data = {
-    message: "success",
-    msg_code: 200,
-    content: JSON.parse(response.data),
+  const dataConvertToJson = JSON.parse(response.data);
+  const data = {
+    message: dataConvertToJson.message,
+    msg_code: dataConvertToJson.msg_code,
+    content: dataConvertToJson.content || null,
   };
   return data;
 };
