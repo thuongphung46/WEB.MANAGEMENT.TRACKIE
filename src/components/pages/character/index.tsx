@@ -4,23 +4,20 @@ import { CharactorTemplate } from "@/components/templates/character";
 import { useCallback, useEffect, useState } from "react";
 
 export const CharactorPage = () => {
-  const [ListCategory, setListCategory] = useState<ICharacter[]>([]);
-  const { data: resListCategory } = useGetListCharacter();
+  const [ListCharacter, setListCharacter] = useState<ICharacter[]>([]);
+  const { data: resListCharacter } = useGetListCharacter();
 
   useEffect(() => {
-    console.log(resListCategory);
-    if (resListCategory) {
-
-      setListCategory(resListCategory);
-
+    if (resListCharacter) {
+      setListCharacter(resListCharacter);
     }
-  }, [resListCategory]);
+  }, [resListCharacter]);
   const handleSetState = useCallback((data: any) => {
-    setListCategory(data);
+    setListCharacter(data);
   }, []);
   return (
     <div>
-      <CharactorTemplate dataSource={ListCategory} setState={handleSetState} />
+      <CharactorTemplate dataSource={ListCharacter} setState={handleSetState} />
     </div>
   );
 };
