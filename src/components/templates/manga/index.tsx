@@ -3,10 +3,10 @@ import { ManganTemplateProps } from "./index.interface";
 import Box from "@mui/material/Box";
 import { ListManga } from "@/components/molecules/mangan/grid";
 
-export const ManganTemplate: FC<ManganTemplateProps> = ({ action, data }) => {
+export const ManganTemplate: FC<ManganTemplateProps> = ({ action, dataSource, setState }) => {
   return (
     <Box>
-      <ListManga dataSource={data}></ListManga>
+      <ListManga dataSource={dataSource} setState={setState}></ListManga>
     </Box>
   );
 };

@@ -1,7 +1,7 @@
 import { useGetListAuthor } from "@/hook/useGetListAuthor";
 import { IAuthor } from "@/interfaces/author";
 import { AuthorTemplate } from "@components/templates/author";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const AuthorPage = () => {
   const [listDataAuthor, setListDataAuthor] = useState<IAuthor[]>([]);
@@ -12,10 +12,14 @@ export const AuthorPage = () => {
       setListDataAuthor(resListAuthor);
     }
   }, [resListAuthor]);
+  const handleSetState = useCallback((data: any) => {
+    setListDataAuthor(data);
+  }, []);
+
 
   return (
     <div>
-      <AuthorTemplate data={listDataAuthor} />
+      <AuthorTemplate data={listDataAuthor} setState={handleSetState} />
     </div>
   );
 };

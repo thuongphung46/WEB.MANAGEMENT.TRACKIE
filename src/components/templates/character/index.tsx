@@ -4,12 +4,11 @@ import Box from "@mui/material/Box";
 import { ListCharacter } from "@/components/molecules/charactor_grid/grid";
 
 export const CharactorTemplate: FC<CharactorTemplateProps> = ({
-  action,
-  data,
+  action, dataSource, setState
 }) => {
   return (
     <Box>
-      <ListCharacter dataSource={data}></ListCharacter>
+      <ListCharacter dataSource={dataSource} setState={setState} ></ListCharacter>
     </Box>
   );
 };

@@ -1,18 +1,23 @@
 import { FC, useCallback } from "react";
 import Box from "@mui/material/Box";
 import { BaseGrid } from "@components/atoms/datagrid";
-// import { columns } from "@/components/molecules/author_grid/columns";
 import LinearProgress from "@mui/material/LinearProgress";
 import { IAuthor } from "@/interfaces/author";
 import { GridColDef } from "@mui/x-data-grid";
 import Avatar from '@mui/material/Avatar';
 import { AuthorService } from "@/services/author";
+import moment from "moment";
+import { MESSAGE_CODE } from "@/interfaces/enum";
+import { toastMessage } from "@/components/atoms/toast_message";
+import { t } from "i18next";
 
-interface Props {
+
+export interface Props {
   dataSource: IAuthor[];
+  setState: (data: any) => void;
 }
 
-export const ListAuthor: FC<Props> = ({ dataSource }) => {
+export const ListAuthor: FC<Props> = ({ dataSource, setState }) => {
   const columns: GridColDef[] = [
     {
       field: "name",
@@ -52,14 +57,49 @@ export const ListAuthor: FC<Props> = ({ dataSource }) => {
       type: "string",
       editable: true,
       renderCell: (params) => {
-        return <Avatar alt="Remy Sharp" src={params.value as string} />;
+        return <Avatar src={params.value as string} />;
       }
-
     }
   ];
-  const handlDelete = useCallback((id: string) => {
-    AuthorService.Delete(id)
-  }, []);
+  const handlDelete = useCallback(async (id: string) => {
+    const result = await AuthorService.Delete(id)
+    if (result.msg_code === MESSAGE_CODE.SUCCESS) {
+      toastMessage(t("toast_message.delete_success"), "success");
+      setState && setState(
+        dataSource.filter((item) => item.id?.toString() !== id)
+      );
+    } else {
+      toastMessage(t("toast_message.delete_fail"), "error");
+    }
+  }, [dataSource, setState]);
+  const handleAddNewAndUpdate = useCallback(async (data: any) => {
+    const ParamsBody: IAuthor = {
+      name: data.name,
+      birthday: moment(data.birthday).format("YYYY-MM-DD"),
+      place: data.place,
+      bio: data.bio,
+      image: data.image
+    }
+    if (data?.isNew) {
+      const result = await AuthorService.Create(ParamsBody);
+      if (result.msg_code === MESSAGE_CODE.SUCCESS) {
+        toastMessage(t("toast_message.add_success"), "success");
+        setState && setState([...dataSource, result.content]);
+      } else {
+        toastMessage(t("toast_message.add_fail"), "error");
+      }
+    } else {
+      const result = await AuthorService.Update(data.id, ParamsBody)
+      if (result.msg_code === MESSAGE_CODE.SUCCESS) {
+        const index = dataSource.findIndex((item) => item.id === data.id);
+        dataSource[index] = result.content;
+        setState && setState([...dataSource]);
+        toastMessage(t("toast_message.update_success"), "success");
+      } else {
+        toastMessage(t("toast_message.update_fail"), "error");
+      }
+    }
+  }, [dataSource, setState]);
 
   return (
     <Box>
@@ -71,6 +111,7 @@ export const ListAuthor: FC<Props> = ({ dataSource }) => {
         columns={columns}
         rows={dataSource}
         onDel={handlDelete}
+        onSave={handleAddNewAndUpdate}
         slots={{
           loadingOverlay: LinearProgress,
         }}

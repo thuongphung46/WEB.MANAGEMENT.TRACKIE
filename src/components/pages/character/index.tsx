@@ -1,7 +1,7 @@
 import { useGetListCharacter } from "@/hook/useGetListCharacter";
 import { ICharacter } from "@/interfaces/character";
 import { CharactorTemplate } from "@/components/templates/character";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const CharactorPage = () => {
   const [ListCategory, setListCategory] = useState<ICharacter[]>([]);
@@ -15,9 +15,12 @@ export const CharactorPage = () => {
 
     }
   }, [resListCategory]);
+  const handleSetState = useCallback((data: any) => {
+    setListCategory(data);
+  }, []);
   return (
     <div>
-      <CharactorTemplate data={ListCategory} />
+      <CharactorTemplate dataSource={ListCategory} setState={handleSetState} />
     </div>
   );
 };

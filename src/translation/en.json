@@ -6,6 +6,14 @@
     "vi": "Vietnamese",
     "view_code": "View code"
   },
+  "toast_message": {
+    "add_success": "Add success",
+    "add_fail": "Add fail",
+    "update_success": "Edit success",
+    "update_fail": "Edit fail",
+    "delete_success": "Delete success",
+    "delete_fail": "Delete fail"
+  },
   "sidebar": {
     "theme": "Theme",
     "light": "Light",
