@@ -19,7 +19,7 @@ export const AuthorPage = () => {
 
   return (
     <div>
-      <AuthorTemplate data={listDataAuthor} setState={handleSetState} />
+      <AuthorTemplate dataSource={listDataAuthor} setState={handleSetState} />
     </div>
   );
 };
