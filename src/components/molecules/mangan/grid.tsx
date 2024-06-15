@@ -1,20 +1,22 @@
 import { FC, useCallback } from "react";
 import Box from "@mui/material/Box";
 import { BaseGrid } from "@components/atoms/datagrid";
-import { columns } from "@/components/molecules/mangan/columns";
 import LinearProgress from "@mui/material/LinearProgress";
 import { IPosts } from "@/interfaces/mangan";
 import { PostsService } from "@/services/mangan";
 import { MESSAGE_CODE } from "@/interfaces/enum";
 import { toastMessage } from "@/components/atoms/toast_message";
 import { t } from "i18next";
+import { GridColDef } from "@mui/x-data-grid";
 
 export interface Props {
   dataSource: IPosts[];
   setState: (data: any) => void;
+  columns: GridColDef[]
+
 }
 
-export const ListManga: FC<Props> = ({ dataSource, setState }) => {
+export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
   const handlDelete = useCallback(async (id: string) => {
     const result = await PostsService.Delete(id)
     if (result.msg_code === MESSAGE_CODE.SUCCESS) {
@@ -27,10 +29,13 @@ export const ListManga: FC<Props> = ({ dataSource, setState }) => {
   const handleAddNewAndUpdate = useCallback(async (data: any) => {
     const params: IPosts = {
       name: data.name,
-      authorIds: data.authorIds,
       image: data.image,
       description: data.description,
       synopsis: data.synopsis,
+      //chưa xử lý
+      authorIds: data.authorIds,
+      characterIds: data.characterIds,
+      genreIds: data.genreIds,
     }
     if (data?.isNew) {
       const result = await PostsService.Create(params);
