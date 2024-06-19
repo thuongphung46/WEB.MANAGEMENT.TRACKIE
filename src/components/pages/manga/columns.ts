@@ -22,32 +22,4 @@ export const columns: GridColDef[] = [
     width: 150,
     type: "String",
   },
-  {
-    field: "image",
-    headerName: "list_manga.table.image",
-    editable: true,
-    width: 150,
-    type: "String",
-  },
-  {
-    field: "genreIds",
-    headerName: "list_manga.table.genreIds",
-    editable: true,
-    width: 150,
-    type: "String",
-  },
-  {
-    field: "authorIds",
-    headerName: "list_manga.table.authorIds",
-    editable: true,
-    width: 150,
-    type: "String",
-  },
-  {
-    field: "characterIds",
-    headerName: "list_manga.table.characterIds",
-    editable: true,
-    width: 150,
-    type: "String",
-  },
 ];

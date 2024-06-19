@@ -27,12 +27,12 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
     }
   }, [dataSource, setState]);
   const handleAddNewAndUpdate = useCallback(async (data: any) => {
+    console.log(data);
     const params: IPosts = {
       name: data.name,
       image: data.image,
       description: data.description,
       synopsis: data.synopsis,
-      //chưa xử lý
       authorIds: data.authorIds,
       characterIds: data.characterIds,
       genreIds: data.genreIds,
@@ -57,6 +57,7 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
       }
     }
   }, [dataSource, setState]);
+
   return (
     <Box>
       <BaseGrid
@@ -64,10 +65,12 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
           height: "calc(100vh - 90px)",
           width: "100%",
         }}
+        addActionsDetail={true}
         columns={columns}
         rows={dataSource}
         onDel={handlDelete}
         onSave={handleAddNewAndUpdate}
+        // onClickDetail={ }
         slots={{
           loadingOverlay: LinearProgress,
         }}
