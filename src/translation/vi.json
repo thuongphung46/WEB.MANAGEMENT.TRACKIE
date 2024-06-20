@@ -104,5 +104,9 @@
       "bio": "Tiểu sử",
       "image": "Hình ảnh"
     }
+  },
+  "confirm": {
+    "save_description": "Bạn có chắc chắn muốn lưu dữ liệu này?",
+    "save_title": "Xác nhận lưu"
   }
 }

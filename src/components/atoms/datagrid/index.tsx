@@ -108,9 +108,12 @@ export const BaseGrid: FC<BaseGridProps> = ({
       setData(data.filter((row) => row.id !== id));
     }
   };
-  const handleClickDetail = useCallback((data: any) => {
-    onClickDetail && onClickDetail(data);
-  }, [onClickDetail]);
+  const handleClickDetail = useCallback(
+    (data: any) => {
+      onClickDetail && onClickDetail(data);
+    },
+    [onClickDetail]
+  );
 
   const processRowUpdate = (newRow: GridRowModel) => {
     const updatedRow = { ...newRow, isNew: false };
@@ -143,7 +146,7 @@ export const BaseGrid: FC<BaseGridProps> = ({
       headerName: "",
       width: 100,
       cellClassName: "actions",
-      getActions: ({ id }) => {
+      getActions: ({ id, row }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
 
         if (isInEditMode) {
@@ -179,20 +182,20 @@ export const BaseGrid: FC<BaseGridProps> = ({
         return [
           ...(addActionsDetail
             ? [
-              <GridActionsCellItem
-                key="detail"
-                icon={
-                  <Tooltip title={t("datagrid.button.detail")}>
-                    <MoreHorizIcon />
-                  </Tooltip>
-                }
-                label="Detail"
-                className="textPrimary"
-                disabled={disable}
-                onClick={handleClickDetail}
-                color="inherit"
-              />,
-            ]
+                <GridActionsCellItem
+                  key="detail"
+                  icon={
+                    <Tooltip title={t("datagrid.button.detail")}>
+                      <MoreHorizIcon />
+                    </Tooltip>
+                  }
+                  label="Detail"
+                  className="textPrimary"
+                  disabled={disable}
+                  onClick={() => handleClickDetail(row)}
+                  color="inherit"
+                />,
+              ]
             : []),
           <GridActionsCellItem
             key="edit"
@@ -246,7 +249,14 @@ export const BaseGrid: FC<BaseGridProps> = ({
           toolbar: EditToolbar,
         }}
         slotProps={{
-          toolbar: { data, setData, setRowModesModel, disable, apiRef, columns },
+          toolbar: {
+            data,
+            setData,
+            setRowModesModel,
+            disable,
+            apiRef,
+            columns,
+          },
         }}
         {...rest}
       />
