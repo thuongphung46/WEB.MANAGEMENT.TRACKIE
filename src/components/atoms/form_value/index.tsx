@@ -14,10 +14,13 @@ export interface IFormField {
   readonly?: boolean;
   ref?: any;
   options?: {
-    value?: string | number;
+    value?: any;
     label?: string;
   }[];
-  defaultValue?: string | number;
+  defaultValue?: {
+    value?: any;
+    label?: string;
+  }[];
 }
 interface Props extends IFormState {
   fields: IFormField[];
@@ -34,152 +37,55 @@ const FormField: FC<Props> = ({
   const renderField = useCallback(
     (field: IFormField) => {
       switch (field.type) {
-        case "select":
-          return (
-            <>
-              {((field.options && field.options.length > 1 && formData) ||
-                action === "ADD_NEW") && (
-                <Autocomplete
-                  disablePortal
-                  readOnly={field.readonly}
-                  size="small"
-                  ref={field.ref}
-                  id={field.id}
-                  defaultValue={
-                    field.options &&
-                    field.options.length > 0 &&
-                    field.options.find(
-                      (option) => option.value === formData[field.id] || ""
-                    )
-                  }
-                  onChange={(e, newValue: any) => {
-                    handleOnChangeField({
-                      target: {
-                        name: field.id,
-                        value: newValue ? newValue.value : "",
-                      },
-                    });
-                  }}
-                  options={
-                    field.options && field.options.length > 0
-                      ? [...field.options, { value: "", label: "" }]
-                      : [{ value: "", label: "" }]
-                  }
-                  getOptionKey={(option) => option.value.toString()}
-                  getOptionLabel={(option) => option.label}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      size="small"
-                      required={field.isRequire}
-                      variant="outlined"
-                    />
-                  )}
-                />
-              )}
-            </>
-          );
-        case "decimal":
-          return (
-            <TextField
-              size="small"
-              fullWidth
-              required={field.isRequire}
-              inputRef={field.ref}
-              id={field.id}
-              name={field.id}
-              autoComplete="new-password"
-              InputProps={{
-                readOnly: field.readonly,
-                inputMode: "decimal",
-              }}
-              type="decimal"
-              defaultValue={formData[field.id] ?? ""}
-              onChange={(e) => {
-                handleOnChangeField(e);
-              }}
-            />
-          );
-        //case select muti
         case "selectMutiple":
           return (
             <>
-              {((field.options && field.options.length > 1 && formData) ||
-                action === "ADD_NEW") && (
-                <Autocomplete
-                  disablePortal
-                  readOnly={field.readonly}
-                  size="small"
-                  ref={field.ref}
-                  id={field.id}
-                  multiple={true}
-                  // defaultValue={
-                  //   field.options &&
-                  //   field.options.length > 0 &&
-                  //   field.options.find(
-                  //     (option) => option.value === formData[field.id] || ""
-                  //   )
-                  // }
-                  onChange={(e, newValue: any) => {
-                    handleOnChangeField({
-                      target: {
-                        name: field.id,
-                        value: newValue ? newValue.value : "",
-                      },
-                    });
-                  }}
-                  options={
-                    field.options && field.options.length > 0
-                      ? [...field.options, { value: "", label: "" }]
-                      : [{ value: "", label: "" }]
-                  }
-                  getOptionKey={(option) => option.value.toString()}
-                  getOptionLabel={(option) => option.label}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      size="small"
-                      required={field.isRequire}
-                      variant="outlined"
-                    />
-                  )}
-                />
-              )}
+              {field.options &&
+                field.options.length > 1 &&
+                field.defaultValue && (
+                  <Autocomplete
+                    readOnly={field.readonly}
+                    size="small"
+                    ref={field.ref}
+                    id={field.id}
+                    multiple
+                    filterSelectedOptions
+                    defaultValue={field.defaultValue}
+                    onChange={(e, newValue: any) => {
+                      handleOnChangeField({
+                        target: {
+                          name: field.id,
+                          value: newValue,
+                        },
+                      });
+                    }}
+                    options={field.options}
+                    getOptionKey={(option) => option?.value}
+                    getOptionLabel={(option) => option?.label}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        size="small"
+                        placeholder={t(field.label)}
+                        variant="outlined"
+                      />
+                    )}
+                  />
+                )}
             </>
           );
         default:
-          return (
-            <TextField
-              size="small"
-              fullWidth
-              required={field.isRequire}
-              inputRef={field.ref}
-              id={field.id}
-              name={field.id}
-              autoComplete="new-password"
-              InputProps={{
-                readOnly: field.readonly,
-              }}
-              type={field.type}
-              defaultValue={formData[field.id] ?? ""}
-              onChange={(e) => handleOnChangeField(e)}
-            />
-          );
+          return <>error</>;
       }
     },
-    [action, formData, handleOnChangeField]
+    [handleOnChangeField]
   );
 
   const renderFields = useMemo(() => {
     return fields.map((field) => (
-      <Grid item xs={6} key={field.id}>
+      <Grid item xs={10} key={field.id}>
         <Grid container alignItems="center">
-          <Grid item xs={5}>
-            <InputLabel required={field.isRequire} htmlFor={field.id}>
-              {t(field.label)}
-            </InputLabel>
-          </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={10}>
             {renderField(field)}
           </Grid>
         </Grid>

@@ -29,10 +29,16 @@ export interface Props {
   listCharacter: ICharacter[];
   listGenre: IGenres[];
 }
+interface IDataItem {
+  authors?: IAuthor[];
+  characters?: ICharacter[];
+  genres?: IGenres[];
+}
 
 export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
   const [open, setOpen] = useState(false);
-  const [dataItem, setDataItem] = useState<IPosts>({});
+  const [dataItem, setDataItem] = useState<IDataItem>({});
+  const [dataEditItem, setDataEditItem] = useState<IDataItem>({});
   const { data: resListAuthor } = useGetListAuthor();
   const { data: resListCategory } = useGetListCategory();
   const { data: resListCharacter } = useGetListCharacter();
@@ -83,22 +89,40 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
   );
   const handleShowDetail = useCallback((data: any) => {
     setDataItem({
-      authorIds: data.authorIds,
-      characterIds: data.characterIds,
-      genreIds: data.genreIds,
+      authors: data.author,
+      characters: data.characters,
+      genres: data.genres,
+    });
+    setDataEditItem({
+      authors: data.author,
+      characters: data.characters,
+      genres: data.genres,
     });
     setOpen(true);
   }, []);
-
   const handleClose = useCallback(() => {
     setOpen(false);
     setDataItem({});
   }, []);
 
+  const hanldeOnChangefield = useDebouncedCallback((e: any) => {
+    const name: "authors" | "characters" | "genres" = e.target.name;
+    const value: { value: number; label: string }[] = e.target.value;
+    if (dataEditItem[name]) {
+      dataEditItem[name] = value.map((i) => {
+        return {
+          id: i.value,
+          name: i.label,
+        };
+      });
+
+      setDataEditItem({ ...dataEditItem });
+    }
+  }, 200);
   const Fields: IFormField[] = useMemo(() => {
     return [
       {
-        id: "authorIds",
+        id: "authors",
         label: "list_manga.table.authorIds",
         type: "selectMutiple",
         isRequire: false,
@@ -109,9 +133,17 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
               label: i.name,
             };
           }) || [],
+        defaultValue:
+          dataItem.authors &&
+          dataItem.authors.map((i) => {
+            return {
+              value: i.id,
+              label: i.name,
+            };
+          }),
       },
       {
-        id: "characterIds",
+        id: "characters",
         label: "list_manga.table.characterIds",
         type: "selectMutiple",
         isRequire: false,
@@ -122,9 +154,17 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
               label: i.name,
             };
           }) || [],
+        defaultValue:
+          dataItem.characters &&
+          dataItem.characters.map((i) => {
+            return {
+              value: i.id,
+              label: i.name,
+            };
+          }),
       },
       {
-        id: "genreIds",
+        id: "genres",
         label: "list_manga.table.genreIds",
         type: "selectMutiple",
         isRequire: false,
@@ -135,16 +175,24 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
               label: i.name,
             };
           }) || [],
+        defaultValue:
+          dataItem.genres &&
+          dataItem.genres.map((i) => {
+            return {
+              value: i.id,
+              label: i.name,
+            };
+          }),
       },
     ];
-  }, [resListAuthor, resListCategory, resListCharacter]);
-
-  const hanldeOnChangefield = useDebouncedCallback((e: any) => {
-    const { name: field, value } = e.target;
-
-    // setFormData(prevFormData => ({ ...prevFormData, [field]: value }));
-  }, 500);
-
+  }, [
+    dataItem.authors,
+    dataItem.characters,
+    dataItem.genres,
+    resListAuthor,
+    resListCategory,
+    resListCharacter,
+  ]);
   const renderPopup = useMemo(() => {
     return (
       <PopupModal handleClose={handleClose} handleSave={() => {}} open={open}>
