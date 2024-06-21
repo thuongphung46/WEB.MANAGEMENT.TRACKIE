@@ -74,11 +74,4 @@ export const columns: GridColDef[] = [
     width: 150,
     type: "String",
   },
-  {
-    field: "image",
-    headerName: "list_charactor.table.image",
-    editable: true,
-    width: 150,
-    type: "String",
-  },
 ];

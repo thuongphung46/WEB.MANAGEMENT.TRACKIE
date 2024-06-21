@@ -54,7 +54,8 @@
       "edit": "Chỉnh sửa",
       "delete": "Xóa",
       "save": "Lưu",
-      "cancel": "Hủy"
+      "cancel": "Hủy",
+      "detail": "Chi tiết"
     },
     "confirm": {
       "delete_description": "Bạn có chắc chắn muốn xóa dữ liệu này không?",
@@ -103,5 +104,9 @@
       "bio": "Tiểu sử",
       "image": "Hình ảnh"
     }
+  },
+  "confirm": {
+    "save_description": "Bạn có chắc chắn muốn lưu dữ liệu này?",
+    "save_title": "Xác nhận lưu"
   }
 }

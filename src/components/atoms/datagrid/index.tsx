@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import {
   DataGrid,
   GridColDef,
@@ -12,12 +12,14 @@ import {
   GridEventListener,
   GridRowEditStopReasons,
   GridRowModel,
+  useGridApiRef,
 } from "@mui/x-data-grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
 import { useConfirm } from "material-ui-confirm";
@@ -34,6 +36,8 @@ interface BaseGridProps extends DataGridProps {
   selectedRows?: GridRowId[];
   rows: any[];
   disable?: boolean;
+  addActionsDetail?: boolean;
+  onClickDetail?: (data: any) => void;
 }
 
 export const BaseGrid: FC<BaseGridProps> = ({
@@ -46,9 +50,12 @@ export const BaseGrid: FC<BaseGridProps> = ({
   onDel,
   disable,
   slots,
+  addActionsDetail,
+  onClickDetail,
   ...rest
 }) => {
   const confirm = useConfirm();
+  const apiRef = useGridApiRef();
   const [data, setData] = React.useState<any[]>([]);
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>(
     {}
@@ -101,6 +108,12 @@ export const BaseGrid: FC<BaseGridProps> = ({
       setData(data.filter((row) => row.id !== id));
     }
   };
+  const handleClickDetail = useCallback(
+    (data: any) => {
+      onClickDetail && onClickDetail(data);
+    },
+    [onClickDetail]
+  );
 
   const processRowUpdate = (newRow: GridRowModel) => {
     const updatedRow = { ...newRow, isNew: false };
@@ -133,12 +146,13 @@ export const BaseGrid: FC<BaseGridProps> = ({
       headerName: "",
       width: 100,
       cellClassName: "actions",
-      getActions: ({ id }) => {
+      getActions: ({ id, row }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
 
         if (isInEditMode) {
           return [
             <GridActionsCellItem
+              key="save"
               icon={
                 <Tooltip title={t("datagrid.button.save")}>
                   <SaveIcon />
@@ -151,6 +165,7 @@ export const BaseGrid: FC<BaseGridProps> = ({
               onClick={handleSaveClick(id)}
             />,
             <GridActionsCellItem
+              key="cancel"
               icon={
                 <Tooltip title={t("datagrid.button.cancel")}>
                   <CancelIcon />
@@ -165,7 +180,25 @@ export const BaseGrid: FC<BaseGridProps> = ({
         }
 
         return [
+          ...(addActionsDetail
+            ? [
+                <GridActionsCellItem
+                  key="detail"
+                  icon={
+                    <Tooltip title={t("datagrid.button.detail")}>
+                      <MoreHorizIcon />
+                    </Tooltip>
+                  }
+                  label="Detail"
+                  className="textPrimary"
+                  disabled={disable}
+                  onClick={() => handleClickDetail(row)}
+                  color="inherit"
+                />,
+              ]
+            : []),
           <GridActionsCellItem
+            key="edit"
             icon={
               <Tooltip title={t("datagrid.button.edit")}>
                 <EditIcon />
@@ -178,6 +211,7 @@ export const BaseGrid: FC<BaseGridProps> = ({
             color="inherit"
           />,
           <GridActionsCellItem
+            key="delete"
             icon={
               <Tooltip title={t("datagrid.button.delete")}>
                 <DeleteIcon />
@@ -192,6 +226,7 @@ export const BaseGrid: FC<BaseGridProps> = ({
       },
     },
   ];
+
   return (
     <div>
       <Typography variant="h5" gutterBottom>
@@ -214,7 +249,14 @@ export const BaseGrid: FC<BaseGridProps> = ({
           toolbar: EditToolbar,
         }}
         slotProps={{
-          toolbar: { data, setData, setRowModesModel, disable },
+          toolbar: {
+            data,
+            setData,
+            setRowModesModel,
+            disable,
+            apiRef,
+            columns,
+          },
         }}
         {...rest}
       />
@@ -229,10 +271,12 @@ interface EditToolbarProps {
     newModel: (oldModel: GridRowModesModel) => GridRowModesModel
   ) => void;
   disable?: boolean;
+  apiRef: React.MutableRefObject<any>;
+  columns: GridColDef[];
 }
 
 function EditToolbar(props: EditToolbarProps) {
-  const { setData, setRowModesModel, data, disable } = props;
+  const { setData, setRowModesModel, data, disable, apiRef, columns } = props;
 
   const handleClick = () => {
     const getRandomUniqueId = (): number => {
@@ -257,6 +301,10 @@ function EditToolbar(props: EditToolbarProps) {
       ...oldModel,
       [id]: { mode: GridRowModes.Edit, fieldToFocus: "name" },
     }));
+    setTimeout(() => {
+      //focus on the second cell of the new row
+      apiRef.current.setCellFocus(id, columns[0].field);
+    }, 100);
   };
 
   return (
@@ -267,7 +315,8 @@ function EditToolbar(props: EditToolbarProps) {
         variant="outlined"
         size="small"
         startIcon={<AddIcon />}
-        onClick={handleClick}>
+        onClick={handleClick}
+      >
         {t("datagrid.button.add_record")}
       </Button>
     </GridToolbarContainer>

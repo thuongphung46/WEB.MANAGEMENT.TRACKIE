@@ -1,3 +1,5 @@
 export interface IFormState {
-  action?: "ADD_NEW" | "EDIT" | "VIEW";
+  action?: IAction;
 }
+
+export type IAction = "ADD_NEW" | "EDIT" | "VIEW";
