@@ -74,6 +74,7 @@ export const ListAuthor: FC<Props> = ({ dataSource, setState }) => {
   }, [dataSource, setState]);
   const handleAddNewAndUpdate = useCallback(async (data: any) => {
     const ParamsBody: IAuthor = {
+      id: null,
       name: data.name,
       birthday: moment(data.birthday).format("YYYY-MM-DD"),
       place: data.place,

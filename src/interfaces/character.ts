@@ -1,6 +1,6 @@
 export interface ICharacter {
-  id?: any;
-  name?: string;
+  id: any;
+  name: string;
   birthday?: string;
   sign?: string;
   height?: number;

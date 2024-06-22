@@ -37,12 +37,14 @@ const FormField: FC<Props> = ({
 }) => {
   const renderField = useCallback(
     (field: IFormField) => {
+
+      console.log("field", field);
       switch (field.type) {
         case "selectMutiple":
           return (
             <>
               {field.options &&
-                field.options.length > 1 &&
+                field.options.length > 0 ?
                 field.defaultValue && (
                   <Autocomplete
                     readOnly={field.readonly}
@@ -73,7 +75,7 @@ const FormField: FC<Props> = ({
                       />
                     )}
                   />
-                )}
+                ) : <>không có dữ liệu</>}
             </>
           );
         default:
@@ -93,6 +95,7 @@ const FormField: FC<Props> = ({
           width: "100%",
           padding: "8px",
         }}
+        key={field.id}
       >
         {renderField(field)}
       </Box>

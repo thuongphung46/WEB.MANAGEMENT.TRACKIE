@@ -26,6 +26,7 @@ export const ListCategory: FC<Props> = ({ dataSource, setState }) => {
   }, [dataSource, setState]);
   const handleAddNewAndUpdate = useCallback(async (data: any) => {
     const params = {
+      id: null,
       name: data.name,
       code: data.code
     }

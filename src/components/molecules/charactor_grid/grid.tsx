@@ -32,6 +32,7 @@ export const ListCharacter: FC<Props> = ({ dataSource, setState }) => {
   const handleAddNewAndUpdate = useCallback(
     async (data: any) => {
       const params: ICharacter = {
+        id: null,
         name: data.name,
         birthday: data.birthday,
         bio: data.bio,

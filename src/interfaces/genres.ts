@@ -1,5 +1,5 @@
 export interface IGenres {
-  id?: any;
+  id: any;
   code?: string;
-  name?: string;
+  name: string;
 }

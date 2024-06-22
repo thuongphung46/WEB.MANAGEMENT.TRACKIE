@@ -9,9 +9,6 @@ import { toastMessage } from "@/components/atoms/toast_message";
 import { t } from "i18next";
 import { GridColDef } from "@mui/x-data-grid";
 import { PopupModal } from "@/components/atoms/popup";
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
 import FormField, { IFormField } from "@/components/atoms/form_value";
 import { useDebouncedCallback } from "use-debounce";
 import { IAuthor } from "@/interfaces/author";
@@ -55,13 +52,14 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
   const handleAddNewAndUpdate = useCallback(
     async (data: any) => {
       const params: IPosts = {
+        id: null,
         name: data.name,
         image: data.image,
         description: data.description,
         synopsis: data.synopsis,
-        authorIds: data.authorIds,
-        characterIds: data.characterIds,
-        genreIds: data.genreIds,
+        authors: data.authorIds,
+        characters: data.characterIds,
+        genres: data.genreIds,
       };
       if (data?.isNew) {
         const result = await PostsService.Create(params);
@@ -102,6 +100,7 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
   const handleClose = useCallback(() => {
     setOpen(false);
     setDataItem({});
+    setDataEditItem({});
   }, []);
 
   const hanldeOnChangefield = useDebouncedCallback((e: any) => {
@@ -139,17 +138,19 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
       const index = dataSource.findIndex((item) => item.id === data.id);
       dataSource[index] = {
         ...result.content,
-        authors: data.authors,
+        author: data.authors,
         characters: data.characters,
         genres: data.genres,
       };
+
       setState([...dataSource]);
       toastMessage(t("toast_message.update_success"), "success");
+      handleClose();
     } else {
       toastMessage(t("toast_message.update_fail"), "error");
     }
 
-  }, [dataEditItem, dataItem.id, dataSource, setState]);
+  }, [dataEditItem.authors, dataEditItem.characters, dataEditItem.genres, dataItem.id, dataSource, handleClose, setState]);
 
 
   const Fields: IFormField[] = useMemo(() => {
@@ -235,7 +236,7 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
               <FormField
                 action={"EDIT"}
                 fields={Fields}
-                formData={dataItem}
+                formData={dataSource.find((i) => i.id === dataItem.id)}
                 handleOnChangeField={hanldeOnChangefield}
               />
             )}
@@ -243,7 +244,7 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
         )}
       </PopupModal>
     );
-  }, [Fields, dataItem, handleClose, handleUpdateDetail, hanldeOnChangefield, open]);
+  }, [Fields, dataItem, dataSource, handleClose, handleUpdateDetail, hanldeOnChangefield, open]);
   return (
     <Box>
       <BaseGrid

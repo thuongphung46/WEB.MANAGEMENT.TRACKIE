@@ -18,7 +18,7 @@ export const PostsService = {
   Create: async (data: IPosts) => {
     return await Request(Controller).postAsync("", data);
   },
-  Update: async (id: string, data: IPosts) => {
+  Update: async (id: string, data: any) => {
     return await Request(Controller).patchAsync(`${id}`, data);
   },
   Delete: async (id: string) => {
