@@ -25,11 +25,9 @@ export interface Props {
   dataSource: IPosts[];
   setState: (data: any) => void;
   columns: GridColDef[];
-  listAuthor: IAuthor[];
-  listCharacter: ICharacter[];
-  listGenre: IGenres[];
 }
 interface IDataItem {
+  id?: number;
   authors?: IAuthor[];
   characters?: ICharacter[];
   genres?: IGenres[];
@@ -89,6 +87,7 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
   );
   const handleShowDetail = useCallback((data: any) => {
     setDataItem({
+      id: data.id,
       authors: data.author,
       characters: data.characters,
       genres: data.genres,
@@ -119,6 +118,40 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
       setDataEditItem({ ...dataEditItem });
     }
   }, 200);
+
+  const handleUpdateDetail = useCallback(async () => {
+    const data = {
+      id: dataItem.id,
+      authors: dataEditItem.authors,
+      characters: dataEditItem.characters,
+      genres: dataEditItem.genres,
+    };
+    if (!data.id) {
+      return;
+    }
+    const result = await PostsService.Update(data.id.toString(), {
+      authorIds: data.authors && data.authors.map((i) => i.id),
+      characterIds: data.characters && data.characters.map((i) => i.id),
+      genreIds: data.genres && data.genres.map((i) => i.id),
+
+    });
+    if (result.msg_code === MESSAGE_CODE.SUCCESS) {
+      const index = dataSource.findIndex((item) => item.id === data.id);
+      dataSource[index] = {
+        ...result.content,
+        authors: data.authors,
+        characters: data.characters,
+        genres: data.genres,
+      };
+      setState([...dataSource]);
+      toastMessage(t("toast_message.update_success"), "success");
+    } else {
+      toastMessage(t("toast_message.update_fail"), "error");
+    }
+
+  }, [dataEditItem, dataItem.id, dataSource, setState]);
+
+
   const Fields: IFormField[] = useMemo(() => {
     return [
       {
@@ -195,24 +228,22 @@ export const ListManga: FC<Props> = ({ dataSource, setState, columns }) => {
   ]);
   const renderPopup = useMemo(() => {
     return (
-      <PopupModal handleClose={handleClose} handleSave={() => {}} open={open}>
+      <PopupModal handleClose={handleClose} handleSave={handleUpdateDetail} open={open}>
         {dataItem && (
           <>
-            <Grid container spacing={2}>
-              {Fields.length > 0 && (
-                <FormField
-                  action={"EDIT"}
-                  fields={Fields}
-                  formData={dataItem}
-                  handleOnChangeField={hanldeOnChangefield}
-                />
-              )}
-            </Grid>
+            {Fields.length > 0 && (
+              <FormField
+                action={"EDIT"}
+                fields={Fields}
+                formData={dataItem}
+                handleOnChangeField={hanldeOnChangefield}
+              />
+            )}
           </>
         )}
       </PopupModal>
     );
-  }, [Fields, dataItem, handleClose, hanldeOnChangefield, open]);
+  }, [Fields, dataItem, handleClose, handleUpdateDetail, hanldeOnChangefield, open]);
   return (
     <Box>
       <BaseGrid

@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { IFormState } from "@/interfaces/action";
 import { t } from "i18next";
+import Box from "@mui/material/Box";
 
 export interface IFormField {
   id: string;
@@ -49,6 +50,7 @@ const FormField: FC<Props> = ({
                     ref={field.ref}
                     id={field.id}
                     multiple
+                    sx={{ width: "100%" }}
                     filterSelectedOptions
                     defaultValue={field.defaultValue}
                     onChange={(e, newValue: any) => {
@@ -83,13 +85,17 @@ const FormField: FC<Props> = ({
 
   const renderFields = useMemo(() => {
     return fields.map((field) => (
-      <Grid item xs={10} key={field.id}>
-        <Grid container alignItems="center">
-          <Grid item xs={10}>
-            {renderField(field)}
-          </Grid>
-        </Grid>
-      </Grid>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100%",
+          padding: "8px",
+        }}
+      >
+        {renderField(field)}
+      </Box>
     ));
   }, [fields, renderField]);
 
