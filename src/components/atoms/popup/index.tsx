@@ -48,12 +48,13 @@ export const PopupModal: FC<IPopupModal> = ({
       >
         <div
           style={{
-            height: "80%",
-            width: "80%",
+            height: "30%",
+            width: "60%",
             backgroundColor: "#fff",
             padding: "12px",
             borderRadius: "4px",
             boxShadow: "0 0 10px 0 rgba(0,0,0,0.1)",
+
           }}
         >
           <Box height={32}>
@@ -69,7 +70,8 @@ export const PopupModal: FC<IPopupModal> = ({
             sx={{
               display: "flex",
               alignItems: "center",
-              height: "calc(100% - 32px)",
+              flexDirection: "column",
+              height: "calc(100% - 32px)", overflow: "auto",
             }}
           >
             {children}

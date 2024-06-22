@@ -1,5 +1,5 @@
 export interface IAuthor {
-  id?: number;
+  id?: any;
   name?: string;
   birthday?: string;
   place?: string;
