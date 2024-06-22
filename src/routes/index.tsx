@@ -7,6 +7,7 @@ import { ManganPage } from "@components/pages/manga";
 import { AuthorPage } from "@components/pages/author";
 import { CategoryPage } from "@components/pages/category";
 import { CharactorPage } from "@/components/pages/character";
+import { SignIn } from "@/components/pages/login";
 
 
 interface PropType {
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
       },
     ]
   },
+  {
+    path: "/login",
+    errorElement: <ErrorPage />,
+    children: [{ path: "/login", element: <SignIn /> }],
+  }
 ]);
 
 export { router };

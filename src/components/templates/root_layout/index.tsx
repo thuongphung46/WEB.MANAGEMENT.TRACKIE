@@ -15,8 +15,9 @@ const RootLayout = () => {
   const [toggled, setToggled] = React.useState(false);
   const [broken, setBroken] = React.useState(false);
 
-  const currentUser = true;
+  // const currentUser = true;
 
+  const currentUser = Boolean(HRMStorage.get(KEY_VALUE.TOKEN));
   useEffect(() => {
     if (!currentUser) {
       navigate("/login");
